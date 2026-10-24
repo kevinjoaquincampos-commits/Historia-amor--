@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia de Amor - Aniversarios & Cartas Eternas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        rose: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        cursive: ['"Dancing Script"', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 228, 230, 0.8);
+        }
+        .dark .glass-card {
+            background: rgba(24, 15, 22, 0.9);
+            border: 1px solid rgba(136, 19, 55, 0.4);
+        }
+
+        #hearts-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Wax Seal Animation */
+        .wax-seal {
+            background: radial-gradient(circle at 35% 35%, #f43f5e, #9f1239);
+            box-shadow: 0 4px 10px rgba(159, 18, 57, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff1f2;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #180f14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fda4af;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f43f5e;
+        }
+    </style>
+</head>
+<body class="bg-rose-50/60 dark:bg-[#12080d] text-slate-800 dark:text-rose-100 font-sans transition-colors duration-300 relative min-h-screen pb-12">
+
+    <!-- Floating Background Hearts Canvas -->
+    <canvas id="hearts-canvas"></canvas>
+
+    <!-- Floating Audio & Controls -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+        <button id="musicToggle" class="w-12 h-12 rounded-full bg-rose-500 hover:bg-rose-600 text-white shadow-lg shadow-rose-500/40 flex items-center justify-center transition-all duration-300 hover:scale-110 group">
+            <i class="fa-solid fa-music text-lg group-hover:animate-bounce"></i>
+        </button>
+        <button id="themeToggle" class="w-12 h-12 rounded-full glass-card hover:bg-rose-100 dark:hover:bg-rose-900/40 text-rose-600 dark:text-rose-300 shadow-md flex items-center justify-center transition-all duration-300 hover:scale-110">
+            <i class="fa-solid fa-moon text-lg dark:hidden"></i>
+            <i class="fa-solid fa-sun text-lg hidden dark:inline"></i>
+        </button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 glass-card border-b border-rose-100 dark:border-rose-900/30 px-4 py-3">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="#" class="font-cursive text-2xl md:text-3xl font-bold text-rose-600 dark:text-rose-400 flex items-center gap-2">
+                <i class="fa-solid fa-heart text-rose-500 animate-pulse text-xl"></i>
+                <span id="navBrand">Nuestra Historia</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-6 font-medium text-sm">
+                <a href="#counter" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">Tiempo Juntos</a>
+                <a href="#anniversaries" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">Aniversarios & Cartas</a>
+                <a href="#timeline" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">Línea del Tiempo</a>
+                <a href="#places" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">Lugares</a>
+                <a href="#gallery" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">Galería</a>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="openSettingsBtn" class="px-3 py-2 rounded-xl bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 hover:bg-rose-200 dark:hover:bg-rose-800/60 font-medium text-xs flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-gear text-sm"></i>
+                    <span class="hidden sm:inline">Ajustes / Respaldo</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-6xl mx-auto px-4 py-8 space-y-16">
+
+        <!-- HERO SECTION & REALTIME COUNTER -->
+        <section id="counter" class="text-center pt-6 pb-10 flex flex-col items-center justify-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 text-xs font-bold mb-6 shadow-sm border border-rose-200 dark:border-rose-800">
+                <i class="fa-solid fa-sparkles text-amber-500"></i>
+                <span>Nuestra Historia de Amor Eterna</span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-slate-900 dark:text-rose-50 tracking-tight leading-tight mb-4">
+                <span id="partner1Name" class="text-rose-600 dark:text-rose-400">Alex</span> 
+                <span class="font-cursive font-normal text-rose-400 dark:text-rose-500 text-3xl md:text-5xl mx-2">&</span> 
+                <span id="partner2Name" class="text-rose-600 dark:text-rose-400">Sofía</span>
+            </h1>
+
+            <p class="text-slate-600 dark:text-rose-200/80 max-w-xl text-sm md:text-base mb-8 font-light leading-relaxed">
+                Cada día, hora y segundo que compartimos es un tesoro imborrable.
+            </p>
+
+            <!-- Counter Display -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 w-full max-w-4xl">
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center border shadow-sm">
+                    <span id="cnt-years" class="text-3xl sm:text-4xl font-bold text-rose-600 dark:text-rose-400 font-serif">00</span>
+                    <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-rose-300/70 font-semibold mt-1">Años</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center border shadow-sm">
+                    <span id="cnt-months" class="text-3xl sm:text-4xl font-bold text-rose-600 dark:text-rose-400 font-serif">00</span>
+                    <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-rose-300/70 font-semibold mt-1">Meses</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center border shadow-sm">
+                    <span id="cnt-days" class="text-3xl sm:text-4xl font-bold text-rose-600 dark:text-rose-400 font-serif">00</span>
+                    <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-rose-300/70 font-semibold mt-1">Días</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center border shadow-sm">
+                    <span id="cnt-hours" class="text-3xl sm:text-4xl font-bold text-rose-600 dark:text-rose-400 font-serif">00</span>
+                    <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-rose-300/70 font-semibold mt-1">Horas</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center border shadow-sm">
+                    <span id="cnt-minutes" class="text-3xl sm:text-4xl font-bold text-rose-600 dark:text-rose-400 font-serif">00</span>
+                    <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-rose-300/70 font-semibold mt-1">Minutos</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center border shadow-sm bg-rose-500/5 dark:bg-rose-500/10">
+                    <span id="cnt-seconds" class="text-3xl sm:text-4xl font-bold text-rose-600 dark:text-rose-400 font-serif animate-pulse">00</span>
+                    <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-rose-300/70 font-semibold mt-1">Segundos</span>
+                </div>
+            </div>
+
+            <div class="mt-6 text-sm text-slate-500 dark:text-rose-300/70 font-medium">
+                Suman un total de <span id="cnt-total-days" class="font-bold text-rose-600 dark:text-rose-400">0</span> días de historia juntos.
+            </div>
+        </section>
+
+
+        <!-- ANNIVERSARY LETTERS & TIME CAPSULES SECTION -->
+        <section id="anniversaries" class="space-y-8 scroll-mt-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-rose-200 dark:border-rose-900/50 pb-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-slate-900 dark:text-rose-100 flex items-center gap-3">
+                        <i class="fa-solid fa-cake-candles text-rose-500"></i> Cartas de Aniversario & Cápsulas
+                    </h2>
+                    <p class="text-slate-600 dark:text-rose-300/80 text-sm mt-1">Escribe y programa una carta especial para cada aniversario o fecha importante.</p>
+                </div>
+                <button id="addLetterBtn" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-medium text-xs flex items-center gap-2 shadow-md shadow-rose-600/20 transition-all self-start md:self-auto">
+                    <i class="fa-solid fa-pen-nib"></i> Añadir Carta de Aniversario
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="lettersGrid"></div>
+        </section>
+
+
+        <!-- TIMELINE SECTION -->
+        <section id="timeline" class="space-y-8 scroll-mt-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-rose-200 dark:border-rose-900/50 pb-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-slate-900 dark:text-rose-100 flex items-center gap-3">
+                        <i class="fa-solid fa-heart-pulse text-rose-500"></i> Línea del Tiempo
+                    </h2>
+                    <p class="text-slate-600 dark:text-rose-300/80 text-sm mt-1">Nuestros momentos históricos más significativos.</p>
+                </div>
+                <button id="addTimelineBtn" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-medium text-xs flex items-center gap-2 shadow-md shadow-rose-600/20 transition-all self-start md:self-auto">
+                    <i class="fa-solid fa-plus"></i> Agregar Momento
+                </button>
+            </div>
+
+            <div class="relative pl-6 md:pl-0">
+                <div class="absolute top-0 bottom-0 left-6 md:left-1/2 w-0.5 bg-gradient-to-b from-rose-300 via-rose-500 to-rose-300 dark:from-rose-900 dark:via-rose-600 dark:to-rose-900 -translate-x-1/2"></div>
+                <div id="timelineList" class="space-y-12"></div>
+            </div>
+        </section>
+
+
+        <!-- SPECIAL PLACES SECTION -->
+        <section id="places" class="space-y-8 scroll-mt-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-rose-200 dark:border-rose-900/50 pb-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-slate-900 dark:text-rose-100 flex items-center gap-3">
+                        <i class="fa-solid fa-map-location-dot text-rose-500"></i> Lugares Especiales
+                    </h2>
+                    <p class="text-slate-600 dark:text-rose-300/80 text-sm mt-1">Destinos, viajes y rincones inolvidables que hemos visitado.</p>
+                </div>
+                <button id="addPlaceBtn" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-medium text-xs flex items-center gap-2 shadow-md shadow-rose-600/20 transition-all self-start md:self-auto">
+                    <i class="fa-solid fa-location-plus"></i> Agregar Lugar
+                </button>
+            </div>
+
+            <div id="placesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+
+        <!-- GALLERY SECTION -->
+        <section id="gallery" class="space-y-8 scroll-mt-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-rose-200 dark:border-rose-900/50 pb-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-slate-900 dark:text-rose-100 flex items-center gap-3">
+                        <i class="fa-solid fa-images text-rose-500"></i> Galería de Recuerdos
+                    </h2>
+                    <p class="text-slate-600 dark:text-rose-300/80 text-sm mt-1">Colección de imágenes de nuestra historia.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="addPhotoBtn" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-medium text-xs flex items-center gap-2 shadow-md shadow-rose-600/20 transition-all">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Subir Foto
+                    </button>
+                </div>
+            </div>
+
+            <div id="galleryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 border-t border-rose-200 dark:border-rose-900/40 py-8 text-center relative z-10 glass-card">
+        <div class="max-w-4xl mx-auto px-4 space-y-3">
+            <p class="font-cursive text-3xl text-rose-600 dark:text-rose-400">Siempre juntos, siempre con amor</p>
+            <p class="text-xs text-slate-500 dark:text-rose-300/60">
+                Página web interactiva permanente. No olvides exportar una copia de seguridad (JSON) periódicamente.
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- MODALS SECTION -->
+
+    <!-- 1. SETTINGS & BACKUP MODAL -->
+    <div id="settingsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 space-y-6 shadow-2xl border border-rose-200 dark:border-rose-800 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-rose-100 dark:border-rose-800 pb-3">
+                <h3 class="font-serif text-xl font-bold text-rose-600 dark:text-rose-400 flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i> Ajustes y Respaldo Permanente
+                </h3>
+                <button class="closeModalBtn text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <form id="settingsForm" class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-medium mb-1">Nombre Persona 1</label>
+                    <input type="text" id="cfgPartner1" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Nombre Persona 2</label>
+                    <input type="text" id="cfgPartner2" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Fecha de Inicio de la Relación</label>
+                    <input type="datetime-local" id="cfgStartDate" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Música de Fondo (URL MP3 u enlace directo)</label>
+                    <input type="url" id="cfgMusicUrl" placeholder="https://ejemplo.com/audio.mp3" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-rose-600 text-white font-medium rounded-xl hover:bg-rose-700 transition-all shadow-md">
+                    Guardar Configuración
+                </button>
+            </form>
+
+            <div class="border-t border-rose-100 dark:border-rose-800 pt-4 space-y-3">
+                <h4 class="font-semibold text-rose-700 dark:text-rose-300 flex items-center gap-2 text-xs">
+                    <i class="fa-solid fa-floppy-disk"></i> Copia de Seguridad Permanente
+                </h4>
+                <p class="text-[11px] text-slate-500 dark:text-rose-300/70">
+                    Exporta un archivo JSON con todo tu contenido. Podrás restaurarlo en cualquier teléfono o computador para no perder nada jamás.
+                </p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="exportDataBtn" class="px-3 py-2 rounded-xl bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white font-medium text-xs flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-download"></i> Exportar JSON
+                    </button>
+                    <label for="importDataInput" class="cursor-pointer px-3 py-2 rounded-xl bg-rose-100 dark:bg-rose-950 hover:bg-rose-200 text-rose-800 dark:text-rose-200 font-medium text-xs flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-upload"></i> Importar JSON
+                    </label>
+                    <input type="file" id="importDataInput" accept=".json" class="hidden">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. ADD / EDIT ANNIVERSARY LETTER MODAL -->
+    <div id="letterModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card bg-[#fffdfa] dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 space-y-6 shadow-2xl border border-rose-200 dark:border-rose-800 max-h-[90vh] overflow-y-auto relative">
+            <button class="closeModalBtn absolute top-5 right-5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+
+            <!-- Read Letter View -->
+            <div id="letterReadView" class="space-y-6 hidden">
+                <div class="text-center space-y-2 border-b border-rose-100 dark:border-rose-900/50 pb-4">
+                    <div class="flex justify-center mb-2">
+                        <div class="w-12 h-12 rounded-full wax-seal flex items-center justify-center text-white shadow-lg">
+                            <i class="fa-solid fa-heart text-xl"></i>
+                        </div>
+                    </div>
+                    <span id="ltrTag" class="px-3 py-1 bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 rounded-full text-xs font-semibold">Carta de Aniversario</span>
+                    <h3 id="ltrTitle" class="font-serif text-2xl font-bold text-rose-600 dark:text-rose-400">Título de la Carta</h3>
+                    <p id="ltrUnlockDate" class="text-xs text-slate-400"></p>
+                </div>
+
+                <div class="p-6 bg-rose-50/50 dark:bg-rose-950/20 rounded-2xl border border-rose-100 dark:border-rose-900/30">
+                    <p id="ltrContent" class="font-cursive text-xl md:text-2xl text-slate-800 dark:text-rose-100 leading-relaxed whitespace-pre-line">
+                        Contenido...
+                    </p>
+                </div>
+
+                <div class="flex justify-between items-center pt-2">
+                    <button id="editCurrentLetterBtn" class="text-xs text-rose-600 dark:text-rose-400 hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-pen"></i> Editar esta carta
+                    </button>
+                    <button class="closeModalBtn px-5 py-2 bg-rose-600 text-white rounded-xl text-xs font-medium hover:bg-rose-700">Cerrar Carta</button>
+                </div>
+            </div>
+
+            <!-- Password Unlock Challenge View -->
+            <div id="letterPasswordView" class="space-y-4 text-center py-4 hidden">
+                <div class="flex justify-center mb-2">
+                    <div class="w-16 h-16 rounded-full wax-seal flex items-center justify-center text-white shadow-xl animate-pulse">
+                        <i class="fa-solid fa-key text-2xl"></i>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-slate-900 dark:text-rose-100">Carta Protegida con Clave Secreta</h3>
+                <p class="text-xs text-slate-500">Ingresa la palabra o código secreto para romper el sello y leer este mensaje:</p>
+                <input type="password" id="passInput" placeholder="Escribe la clave secreta..." class="w-full text-center px-4 py-2.5 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none text-sm">
+                <p id="passError" class="text-xs text-rose-500 hidden">Clave incorrecta. ¡Inténtalo de nuevo!</p>
+                <button id="submitPassBtn" class="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium rounded-xl shadow-md">Abrir Carta de Aniversario</button>
+            </div>
+
+            <!-- Edit / Add Form View -->
+            <form id="letterForm" class="space-y-4 text-xs hidden">
+                <h3 class="font-serif text-xl font-bold text-rose-600 dark:text-rose-400" id="ltrFormTitle">Escribir Carta de Aniversario</h3>
+                <input type="hidden" id="ltrId">
+                
+                <div>
+                    <label class="block font-medium mb-1">Título u Ocasión de Aniversario</label>
+                    <input type="text" id="ltrInputTitle" placeholder="Ej: 1er Aniversario Juntos / Carta para los 500 días" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium mb-1">Fecha del Aniversario (Desbloqueo Automático)</label>
+                        <input type="date" id="ltrInputDate" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">O Clave Secreta (Opcional)</label>
+                        <input type="text" id="ltrInputPassword" placeholder="Ej: nuestra_fecha" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-medium mb-1">Contenido de la Carta de Amor</label>
+                    <textarea id="ltrInputContent" rows="7" placeholder="Escribe tu mensaje profundo para este aniversario..." class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-rose-600 text-white rounded-xl font-medium text-xs hover:bg-rose-700 shadow-md">Guardar Carta de Aniversario</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. ADD / EDIT TIMELINE MODAL -->
+    <div id="timelineModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-rose-200 dark:border-rose-800 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-rose-100 dark:border-rose-800 pb-3">
+                <h3 class="font-serif text-xl font-bold text-rose-600 dark:text-rose-400" id="tlModalTitle">Agregar Hito</h3>
+                <button class="closeModalBtn text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="timelineForm" class="space-y-3 text-xs">
+                <input type="hidden" id="tlId">
+                <div>
+                    <label class="block font-medium mb-1">Título del Momento</label>
+                    <input type="text" id="tlTitle" placeholder="Ej: Nos conocimos" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium mb-1">Fecha</label>
+                        <input type="date" id="tlDate" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Ubicación / Lugar</label>
+                        <input type="text" id="tlLocation" placeholder="Ej: Parque Central" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Descripción / Recuerdo</label>
+                    <textarea id="tlDesc" rows="3" placeholder="Escribe los detalles de este momento..." class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required></textarea>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Fotografía (Subir archivo o URL)</label>
+                    <input type="file" id="tlPhotoFile" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-rose-100 file:text-rose-700 hover:file:bg-rose-200 mb-2">
+                    <input type="url" id="tlPhotoUrl" placeholder="O pega el enlace de la imagen (https://...)" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                </div>
+                <button type="submit" class="w-full py-2.5 bg-rose-600 text-white font-medium rounded-xl hover:bg-rose-700 transition-all shadow-md">Guardar Momento</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. ADD / EDIT PLACE MODAL -->
+    <div id="placeModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-rose-200 dark:border-rose-800 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-rose-100 dark:border-rose-800 pb-3">
+                <h3 class="font-serif text-xl font-bold text-rose-600 dark:text-rose-400" id="plModalTitle">Agregar Lugar</h3>
+                <button class="closeModalBtn text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="placeForm" class="space-y-3 text-xs">
+                <input type="hidden" id="plId">
+                <div>
+                    <label class="block font-medium mb-1">Nombre del Lugar / Ciudad</label>
+                    <input type="text" id="plName" placeholder="Ej: Playa del Carmen" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium mb-1">Categoría</label>
+                        <select id="plCategory" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                            <option value="Viaje">Viaje</option>
+                            <option value="Cita">Cita Romántica</option>
+                            <option value="Restaurante">Restaurante</option>
+                            <option value="Especial">Lugar Especial</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Enlace a Google Maps (Opcional)</label>
+                        <input type="url" id="plMapUrl" placeholder="https://maps.google.com/..." class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">¿Por qué es especial?</label>
+                    <textarea id="plDesc" rows="3" placeholder="Describe qué vivieron aquí..." class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none" required></textarea>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Foto del Lugar (Subir archivo o URL)</label>
+                    <input type="file" id="plPhotoFile" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-rose-100 file:text-rose-700 hover:file:bg-rose-200 mb-2">
+                    <input type="url" id="plPhotoUrl" placeholder="O pega la URL de la imagen" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                </div>
+                <button type="submit" class="w-full py-2.5 bg-rose-600 text-white font-medium rounded-xl hover:bg-rose-700 transition-all shadow-md">Guardar Lugar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 5. UPLOAD PHOTO TO GALLERY MODAL -->
+    <div id="photoModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-rose-200 dark:border-rose-800">
+            <div class="flex items-center justify-between border-b border-rose-100 dark:border-rose-800 pb-3">
+                <h3 class="font-serif text-xl font-bold text-rose-600 dark:text-rose-400">Subir Fotografía</h3>
+                <button class="closeModalBtn text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="photoForm" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-medium mb-1">Seleccionar desde Archivo</label>
+                    <input type="file" id="phFile" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-rose-100 file:text-rose-700 hover:file:bg-rose-200">
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">O pegar URL directa de la foto</label>
+                    <input type="url" id="phUrl" placeholder="https://..." class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Título o Recuerdo corto (Opcional)</label>
+                    <input type="text" id="phCaption" placeholder="Ej: En la playa al atardecer" class="w-full px-3 py-2 rounded-xl border border-rose-200 dark:border-rose-800 bg-white/50 dark:bg-slate-800 focus:ring-2 focus:ring-rose-500 outline-none">
+                </div>
+                <button type="submit" class="w-full py-2.5 bg-rose-600 text-white font-medium rounded-xl hover:bg-rose-700 transition-all shadow-md">Agregar a la Galería</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 6. LIGHTBOX FULLSCREEN IMAGE MODAL -->
+    <div id="lightboxModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <button class="closeModalBtn absolute top-5 right-5 text-white/70 hover:text-white text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        <div class="max-w-4xl w-full flex flex-col items-center gap-4">
+            <img id="lightboxImg" src="" alt="Recuerdo" class="max-h-[80vh] w-auto object-contain rounded-2xl shadow-2xl">
+            <p id="lightboxCaption" class="text-white/90 text-sm font-medium text-center"></p>
+            <button id="deletePhotoBtn" class="px-4 py-2 bg-rose-600/80 hover:bg-rose-600 text-white rounded-xl text-xs font-medium backdrop-blur-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-trash"></i> Eliminar Foto
+            </button>
+        </div>
+    </div>
+
+    <!-- AUDIO PLAYER -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-acoustic-guitar-112349.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        const DEFAULT_DATA = {
+            config: {
+                partner1: "Alex",
+                partner2: "Sofía",
+                startDate: "2023-02-14T00:00",
+                musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-acoustic-guitar-112349.mp3"
+            },
+            timeline: [
+                {
+                    id: "1",
+                    title: "Nuestra Primera Cita",
+                    date: "2023-02-14",
+                    location: "Café del Centro",
+                    desc: "Hablamos durante 4 horas continuas sin ver el reloj. Ahí supe que eras la persona indicada.",
+                    photo: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    id: "2",
+                    title: "Nuestro Primer Viaje Juntos",
+                    date: "2023-07-20",
+                    location: "Bariloche",
+                    desc: "Recorriendo los lagos, compartiendo chocolates calientes y atardeceres mágicos.",
+                    photo: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            places: [
+                {
+                    id: "1",
+                    name: "Mirador de la Montaña",
+                    category: "Viaje",
+                    mapUrl: "https://maps.google.com",
+                    desc: "Donde vimos el atardecer juntos y prometimos viajar siempre uno al lado del otro.",
+                    photo: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            letters: [
+                {
+                    id: "1",
+                    title: "Primer Año de Amor (1er Aniversario)",
+                    unlockDate: "2024-02-14",
+                    password: "",
+                    content: "¡Feliz primer año mi amor! 365 días llenos de risas, aprendizaje y complicidad única. Gracias por cada abrazo y por ser mi lugar favorito en el mundo."
+                },
+                {
+                    id: "2",
+                    title: "Aniversario #2",
+                    unlockDate: "2025-02-14",
+                    password: "",
+                    content: "Dos años construyendo un camino hermoso juntos. Cada día te quiero más que el anterior."
+                },
+                {
+                    id: "3",
+                    title: "Cápsula Secreta",
+                    unlockDate: "",
+                    password: "amor",
+                    content: "¡Descubriste la clave secreta! Esta carta es para recordarte que siempre estaré a tu lado celebrando cada logro y momento juntos."
+                }
+            ],
+            gallery: [
+                { url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80", caption: "Atardecer juntos" },
+                { url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80", caption: "Nuestros abracitos" }
+            ]
+        };
+
+        let appData = JSON.parse(localStorage.getItem('our_love_story_v2')) || DEFAULT_DATA;
+
+        function saveData() {
+            localStorage.setItem('our_love_story_v2', JSON.stringify(appData));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initHeartsCanvas();
+            renderHeader();
+            startLiveCounter();
+            renderLetters();
+            renderTimeline();
+            renderPlaces();
+            renderGallery();
+            setupEventListeners();
+        });
+
+        function renderHeader() {
+            document.getElementById('partner1Name').textContent = appData.config.partner1 || "Él";
+            document.getElementById('partner2Name').textContent = appData.config.partner2 || "Ella";
+            document.getElementById('navBrand').textContent = `${appData.config.partner1} & ${appData.config.partner2}`;
+            document.getElementById('cfgPartner1').value = appData.config.partner1;
+            document.getElementById('cfgPartner2').value = appData.config.partner2;
+            document.getElementById('cfgStartDate').value = appData.config.startDate;
+            document.getElementById('cfgMusicUrl').value = appData.config.musicUrl || '';
+
+            const bgMusic = document.getElementById('bgMusic');
+            if (appData.config.musicUrl) {
+                bgMusic.src = appData.config.musicUrl;
+            }
+        }
+
+        function startLiveCounter() {
+            function update() {
+                const start = new Date(appData.config.startDate).getTime();
+                const now = new Date().getTime();
+                const diff = Math.max(0, now - start);
+
+                const seconds = Math.floor((diff / 1000) % 60);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+                const startDateObj = new Date(start);
+                const nowDateObj = new Date(now);
+
+                let years = nowDateObj.getFullYear() - startDateObj.getFullYear();
+                let months = nowDateObj.getMonth() - startDateObj.getMonth();
+                let days = nowDateObj.getDate() - startDateObj.getDate();
+
+                if (days < 0) {
+                    months--;
+                    const prevMonthLastDay = new Date(nowDateObj.getFullYear(), nowDateObj.getMonth(), 0).getDate();
+                    days += prevMonthLastDay;
+                }
+                if (months < 0) {
+                    years--;
+                    months += 12;
+                }
+
+                const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                document.getElementById('cnt-years').textContent = String(years).padStart(2, '0');
+                document.getElementById('cnt-months').textContent = String(months).padStart(2, '0');
+                document.getElementById('cnt-days').textContent = String(days).padStart(2, '0');
+                document.getElementById('cnt-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('cnt-minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('cnt-seconds').textContent = String(seconds).padStart(2, '0');
+                document.getElementById('cnt-total-days').textContent = totalDays.toLocaleString();
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        function renderLetters() {
+            const grid = document.getElementById('lettersGrid');
+            grid.innerHTML = '';
+
+            const today = new Date().toISOString().split('T')[0];
+
+            appData.letters.forEach(letter => {
+                const isDateUnlocked = letter.unlockDate && today >= letter.unlockDate;
+                const isPasswordProtected = !!letter.password;
+                const isUnlocked = isDateUnlocked || (!letter.unlockDate && !isPasswordProtected);
+
+                const card = document.createElement('div');
+                card.className = "glass-card p-5 rounded-3xl border shadow-sm transition-all flex flex-col justify-between relative overflow-hidden group border-rose-100 dark:border-rose-900/30";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-full flex items-center justify-center ${isUnlocked ? 'wax-seal text-white' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'}">
+                                <i class="fa-solid ${isUnlocked ? 'fa-envelope-open' : 'fa-lock'} text-sm"></i>
+                            </span>
+                            <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full ${isUnlocked ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300'}">
+                                ${isUnlocked ? 'Desbloqueada' : (isPasswordProtected ? 'Con Clave Secreta' : 'Cápsula del Tiempo')}
+                            </span>
+                        </div>
+                        <h3 class="font-serif text-base font-bold text-slate-900 dark:text-rose-100 mb-1">${escapeHtml(letter.title)}</h3>
+                        <p class="text-xs text-slate-500 dark:text-rose-300/60 mb-4">
+                            ${letter.unlockDate ? `Aniversario: ${formatDate(letter.unlockDate)}` : (isPasswordProtected ? 'Ingresa la clave para abrir' : 'Carta de Amor Especial')}
+                        </p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <button onclick="handleOpenLetter('${letter.id}')" class="w-full py-2.5 rounded-xl text-xs font-semibold ${isUnlocked ? 'bg-rose-600 hover:bg-rose-700 text-white' : 'bg-slate-800 hover:bg-slate-900 text-white dark:bg-rose-950 dark:hover:bg-rose-900'} shadow-md transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid ${isUnlocked ? 'fa-envelope-open-text' : 'fa-key'}"></i>
+                            ${isUnlocked ? 'Leer Carta de Aniversario' : 'Desbloquear Carta'}
+                        </button>
+                        <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity pt-1">
+                            <button onclick="editLetter('${letter.id}')" class="text-[11px] text-slate-500 hover:text-rose-600"><i class="fa-solid fa-pen"></i> Editar</button>
+                            <button onclick="deleteLetter('${letter.id}')" class="text-[11px] text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i> Eliminar</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timelineList');
+            container.innerHTML = '';
+
+            const sorted = [...appData.timeline].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            sorted.forEach((item, index) => {
+                const isEven = index % 2 === 0;
+                const card = document.createElement('div');
+                card.className = `relative flex flex-col md:flex-row items-center ${isEven ? 'md:flex-row-reverse' : ''} gap-6`;
+
+                card.innerHTML = `
+                    <div class="absolute left-6 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-rose-500 border-4 border-white dark:border-slate-900 shadow-md flex items-center justify-center text-white text-xs z-10">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <div class="w-full md:w-1/2 pl-12 md:pl-0 ${isEven ? 'md:pr-10 md:text-right' : 'md:pl-10'}">
+                        <div class="glass-card p-5 rounded-3xl shadow-sm hover:shadow-md transition-all border border-rose-100 dark:border-rose-900/30 group">
+                            <div class="flex items-center gap-2 text-xs font-semibold text-rose-500 mb-2 ${isEven ? 'md:justify-end' : ''}">
+                                <i class="fa-regular fa-calendar"></i> ${formatDate(item.date)}
+                                ${item.location ? `<span class="opacity-40">•</span> <i class="fa-solid fa-location-dot"></i> ${escapeHtml(item.location)}` : ''}
+                            </div>
+                            <h3 class="font-serif text-lg font-bold text-slate-900 dark:text-rose-100 mb-2">${escapeHtml(item.title)}</h3>
+                            <p class="text-xs text-slate-600 dark:text-rose-200/80 leading-relaxed mb-4">${escapeHtml(item.desc)}</p>
+                            
+                            ${item.photo ? `
+                                <img src="${item.photo}" alt="${escapeHtml(item.title)}" class="w-full h-44 object-cover rounded-2xl shadow-sm cursor-pointer hover:opacity-95 transition-opacity" onclick="openLightbox('${item.photo}', '${escapeHtml(item.title)}')">
+                            ` : ''}
+
+                            <div class="mt-4 pt-3 border-t border-rose-100 dark:border-rose-900/30 flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button onclick="editTimeline('${item.id}')" class="text-xs text-slate-500 hover:text-rose-600"><i class="fa-solid fa-pen"></i> Editar</button>
+                                <button onclick="deleteTimeline('${item.id}')" class="text-xs text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i> Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderPlaces() {
+            const grid = document.getElementById('placesGrid');
+            grid.innerHTML = '';
+
+            appData.places.forEach(place => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-rose-100 dark:border-rose-900/30 flex flex-col group";
+
+                card.innerHTML = `
+                    <div class="relative h-48 bg-rose-100 dark:bg-rose-950/40 overflow-hidden">
+                        ${place.photo ? `
+                            <img src="${place.photo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onclick="openLightbox('${place.photo}', '${escapeHtml(place.name)}')">
+                        ` : `
+                            <div class="w-full h-full flex items-center justify-center text-rose-300 dark:text-rose-800">
+                                <i class="fa-solid fa-map-location-dot text-4xl"></i>
+                            </div>
+                        `}
+                        <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-white/80 dark:bg-slate-900/80 backdrop-blur-md text-rose-600 dark:text-rose-400">
+                            ${escapeHtml(place.category || 'Lugar')}
+                        </span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-lg font-bold text-slate-900 dark:text-rose-100 mb-1 flex items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i> ${escapeHtml(place.name)}
+                            </h3>
+                            <p class="text-xs text-slate-600 dark:text-rose-200/80 leading-relaxed mt-2">${escapeHtml(place.desc)}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-rose-100 dark:border-rose-900/30 flex items-center justify-between text-xs">
+                            ${place.mapUrl ? `
+                                <a href="${place.mapUrl}" target="_blank" class="text-rose-600 dark:text-rose-400 font-medium hover:underline flex items-center gap-1">
+                                    <i class="fa-solid fa-map"></i> Ver en Google Maps
+                                </a>
+                            ` : '<span></span>'}
+                            <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button onclick="editPlace('${place.id}')" class="text-slate-500 hover:text-rose-600"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="deletePlace('${place.id}')" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
+
+            appData.gallery.forEach((photo, index) => {
+                const url = typeof photo === 'string' ? photo : photo.url;
+                const caption = typeof photo === 'string' ? '' : photo.caption;
+
+                const item = document.createElement('div');
+                item.className = "relative group aspect-square rounded-2xl overflow-hidden glass-card shadow-sm cursor-pointer";
+                item.innerHTML = `
+                    <img src="${url}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onclick="openLightbox('${url}', '${escapeHtml(caption)}', ${index})">
+                    <div class="absolute inset-0 bg-rose-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white gap-3">
+                        <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+
+        // EVENT HANDLERS
+        function setupEventListeners() {
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+            });
+
+            const musicBtn = document.getElementById('musicToggle');
+            const bgMusic = document.getElementById('bgMusic');
+            let isPlaying = false;
+
+            musicBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    bgMusic.pause();
+                    musicBtn.classList.remove('bg-emerald-500');
+                    musicBtn.classList.add('bg-rose-500');
+                } else {
+                    bgMusic.play().catch(e => console.log("Audio error:", e));
+                    musicBtn.classList.remove('bg-rose-500');
+                    musicBtn.classList.add('bg-emerald-500');
+                }
+                isPlaying = !isPlaying;
+            });
+
+            document.querySelectorAll('.closeModalBtn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.fixed.z-50').forEach(modal => modal.classList.add('hidden'));
+                });
+            });
+
+            document.getElementById('openSettingsBtn').addEventListener('click', () => {
+                document.getElementById('settingsModal').classList.remove('hidden');
+            });
+
+            document.getElementById('settingsForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                appData.config.partner1 = document.getElementById('cfgPartner1').value;
+                appData.config.partner2 = document.getElementById('cfgPartner2').value;
+                appData.config.startDate = document.getElementById('cfgStartDate').value;
+                appData.config.musicUrl = document.getElementById('cfgMusicUrl').value;
+                saveData();
+                renderHeader();
+                document.getElementById('settingsModal').classList.add('hidden');
+            });
+
+            document.getElementById('exportDataBtn').addEventListener('click', () => {
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
+                const downloadAnchor = document.createElement('a');
+                downloadAnchor.setAttribute("href", dataStr);
+                downloadAnchor.setAttribute("download", `nuestra_historia_amor_backup.json`);
+                document.body.appendChild(downloadAnchor);
+                downloadAnchor.click();
+                downloadAnchor.remove();
+            });
+
+            document.getElementById('importDataInput').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        if (imported.config && imported.letters) {
+                            appData = imported;
+                            saveData();
+                            location.reload();
+                        } else {
+                            alert('El archivo no tiene el formato válido de Nuestra Historia.');
+                        }
+                    } catch (err) {
+                        alert('Error al leer el archivo JSON.');
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            // LETTER FORM
+            document.getElementById('addLetterBtn').addEventListener('click', () => {
+                document.getElementById('letterForm').reset();
+                document.getElementById('ltrId').value = '';
+                document.getElementById('ltrFormTitle').textContent = 'Escribir Carta de Aniversario';
+                document.getElementById('letterReadView').classList.add('hidden');
+                document.getElementById('letterPasswordView').classList.add('hidden');
+                document.getElementById('letterForm').classList.remove('hidden');
+                document.getElementById('letterModal').classList.remove('hidden');
+            });
+
+            document.getElementById('letterForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const id = document.getElementById('ltrId').value || Date.now().toString();
+
+                const letter = {
+                    id,
+                    title: document.getElementById('ltrInputTitle').value,
+                    unlockDate: document.getElementById('ltrInputDate').value,
+                    password: document.getElementById('ltrInputPassword').value,
+                    content: document.getElementById('ltrInputContent').value
+                };
+
+                const idx = appData.letters.findIndex(l => l.id === id);
+                if (idx > -1) appData.letters[idx] = letter;
+                else appData.letters.push(letter);
+
+                saveData();
+                renderLetters();
+                document.getElementById('letterModal').classList.add('hidden');
+            });
+
+            // TIMELINE FORM
+            document.getElementById('addTimelineBtn').addEventListener('click', () => {
+                document.getElementById('timelineForm').reset();
+                document.getElementById('tlId').value = '';
+                document.getElementById('tlModalTitle').textContent = 'Agregar Momento';
+                document.getElementById('timelineModal').classList.remove('hidden');
+            });
+
+            document.getElementById('timelineForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const id = document.getElementById('tlId').value || Date.now().toString();
+                const fileInput = document.getElementById('tlPhotoFile');
+                const urlInput = document.getElementById('tlPhotoUrl').value;
+                let photo = urlInput;
+
+                if (fileInput.files[0]) {
+                    photo = await convertBase64(fileInput.files[0]);
+                } else if (!photo && id) {
+                    photo = appData.timeline.find(t => t.id === id)?.photo || '';
+                }
+
+                const item = {
+                    id,
+                    title: document.getElementById('tlTitle').value,
+                    date: document.getElementById('tlDate').value,
+                    location: document.getElementById('tlLocation').value,
+                    desc: document.getElementById('tlDesc').value,
+                    photo
+                };
+
+                const idx = appData.timeline.findIndex(t => t.id === id);
+                if (idx > -1) appData.timeline[idx] = item;
+                else appData.timeline.push(item);
+
+                saveData();
+                renderTimeline();
+                document.getElementById('timelineModal').classList.add('hidden');
+            });
+
+            // PLACE FORM
+            document.getElementById('addPlaceBtn').addEventListener('click', () => {
+                document.getElementById('placeForm').reset();
+                document.getElementById('plId').value = '';
+                document.getElementById('plModalTitle').textContent = 'Agregar Lugar';
+                document.getElementById('placeModal').classList.remove('hidden');
+            });
+
+            document.getElementById('placeForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const id = document.getElementById('plId').value || Date.now().toString();
+                const fileInput = document.getElementById('plPhotoFile');
+                const urlInput = document.getElementById('plPhotoUrl').value;
+                let photo = urlInput;
+
+                if (fileInput.files[0]) {
+                    photo = await convertBase64(fileInput.files[0]);
+                } else if (!photo && id) {
+                    photo = appData.places.find(p => p.id === id)?.photo || '';
+                }
+
+                const place = {
+                    id,
+                    name: document.getElementById('plName').value,
+                    category: document.getElementById('plCategory').value,
+                    mapUrl: document.getElementById('plMapUrl').value,
+                    desc: document.getElementById('plDesc').value,
+                    photo
+                };
+
+                const idx = appData.places.findIndex(p => p.id === id);
+                if (idx > -1) appData.places[idx] = place;
+                else appData.places.push(place);
+
+                saveData();
+                renderPlaces();
+                document.getElementById('placeModal').classList.add('hidden');
+            });
+
+            // PHOTO FORM
+            document.getElementById('addPhotoBtn').addEventListener('click', () => {
+                document.getElementById('photoForm').reset();
+                document.getElementById('photoModal').classList.remove('hidden');
+            });
+
+            document.getElementById('photoForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const fileInput = document.getElementById('phFile');
+                const urlInput = document.getElementById('phUrl').value;
+                const caption = document.getElementById('phCaption').value;
+                let url = urlInput;
+
+                if (fileInput.files[0]) {
+                    url = await convertBase64(fileInput.files[0]);
+                }
+
+                if (url) {
+                    appData.gallery.unshift({ url, caption });
+                    saveData();
+                    renderGallery();
+                    document.getElementById('photoModal').classList.add('hidden');
+                }
+            });
+
+            document.getElementById('editCurrentLetterBtn').addEventListener('click', () => {
+                const id = document.getElementById('ltrId').value;
+                editLetter(id);
+            });
+        }
+
+        // ACTIONS
+        function handleOpenLetter(id) {
+            const letter = appData.letters.find(l => l.id === id);
+            if (!letter) return;
+
+            const today = new Date().toISOString().split('T')[0];
+            const isDateUnlocked = letter.unlockDate && today >= letter.unlockDate;
+            const isPasswordProtected = !!letter.password;
+            const isUnlocked = isDateUnlocked || (!letter.unlockDate && !isPasswordProtected);
+
+            document.getElementById('ltrId').value = letter.id;
+
+            if (isUnlocked) {
+                showLetterContent(letter);
+            } else if (isPasswordProtected) {
+                document.getElementById('letterReadView').classList.add('hidden');
+                document.getElementById('letterForm').classList.add('hidden');
+                document.getElementById('letterPasswordView').classList.remove('hidden');
+                document.getElementById('passInput').value = '';
+                document.getElementById('passError').classList.add('hidden');
+                document.getElementById('letterModal').classList.remove('hidden');
+
+                document.getElementById('submitPassBtn').onclick = () => {
+                    const pass = document.getElementById('passInput').value;
+                    if (pass === letter.password) {
+                        showLetterContent(letter);
+                    } else {
+                        document.getElementById('passError').classList.remove('hidden');
+                    }
+                };
+            } else {
+                alert(`Esta carta está guardada para el aniversario del ${formatDate(letter.unlockDate)}.`);
+            }
+        }
+
+        function showLetterContent(letter) {
+            document.getElementById('ltrTitle').textContent = letter.title;
+            document.getElementById('ltrUnlockDate').textContent = letter.unlockDate ? `Aniversario: ${formatDate(letter.unlockDate)}` : 'Carta de Amor Especial';
+            document.getElementById('ltrContent').textContent = letter.content;
+
+            document.getElementById('letterPasswordView').classList.add('hidden');
+            document.getElementById('letterForm').classList.add('hidden');
+            document.getElementById('letterReadView').classList.remove('hidden');
+            document.getElementById('letterModal').classList.remove('hidden');
+        }
+
+        function editLetter(id) {
+            const letter = appData.letters.find(l => l.id === id);
+            if (!letter) return;
+            document.getElementById('ltrId').value = letter.id;
+            document.getElementById('ltrInputTitle').value = letter.title;
+            document.getElementById('ltrInputDate').value = letter.unlockDate || '';
+            document.getElementById('ltrInputPassword').value = letter.password || '';
+            document.getElementById('ltrInputContent').value = letter.content;
+            document.getElementById('ltrFormTitle').textContent = 'Editar Carta de Aniversario';
+
+            document.getElementById('letterReadView').classList.add('hidden');
+            document.getElementById('letterPasswordView').classList.add('hidden');
+            document.getElementById('letterForm').classList.remove('hidden');
+            document.getElementById('letterModal').classList.remove('hidden');
+        }
+
+        function deleteLetter(id) {
+            appData.letters = appData.letters.filter(l => l.id !== id);
+            saveData();
+            renderLetters();
+        }
+
+        function editTimeline(id) {
+            const item = appData.timeline.find(t => t.id === id);
+            if (!item) return;
+            document.getElementById('tlId').value = item.id;
+            document.getElementById('tlTitle').value = item.title;
+            document.getElementById('tlDate').value = item.date;
+            document.getElementById('tlLocation').value = item.location || '';
+            document.getElementById('tlDesc').value = item.desc;
+            document.getElementById('tlPhotoUrl').value = item.photo || '';
+            document.getElementById('tlModalTitle').textContent = 'Editar Momento';
+            document.getElementById('timelineModal').classList.remove('hidden');
+        }
+
+        function deleteTimeline(id) {
+            appData.timeline = appData.timeline.filter(t => t.id !== id);
+            saveData();
+            renderTimeline();
+        }
+
+        function editPlace(id) {
+            const p = appData.places.find(item => item.id === id);
+            if (!p) return;
+            document.getElementById('plId').value = p.id;
+            document.getElementById('plName').value = p.name;
+            document.getElementById('plCategory').value = p.category;
+            document.getElementById('plMapUrl').value = p.mapUrl || '';
+            document.getElementById('plDesc').value = p.desc;
+            document.getElementById('plPhotoUrl').value = p.photo || '';
+            document.getElementById('plModalTitle').textContent = 'Editar Lugar';
+            document.getElementById('placeModal').classList.remove('hidden');
+        }
+
+        function deletePlace(id) {
+            appData.places = appData.places.filter(p => p.id !== id);
+            saveData();
+            renderPlaces();
+        }
+
+        function openLightbox(photoUrl, caption = '', galleryIndex = null) {
+            document.getElementById('lightboxImg').src = photoUrl;
+            document.getElementById('lightboxCaption').textContent = caption;
+            document.getElementById('deletePhotoBtn').style.display = (galleryIndex !== null) ? 'block' : 'none';
+            document.getElementById('lightboxModal').classList.remove('hidden');
+
+            document.getElementById('deletePhotoBtn').onclick = () => {
+                if (galleryIndex !== null) {
+                    appData.gallery.splice(galleryIndex, 1);
+                    saveData();
+                    renderGallery();
+                    document.getElementById('lightboxModal').classList.add('hidden');
+                }
+            };
+        }
+
+        function convertBase64(file) {
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = () => resolve(fileReader.result);
+                fileReader.onerror = (error) => reject(error);
+            });
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateStr + 'T00:00:00').toLocaleDateString('es-ES', options);
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        function initHeartsCanvas() {
+            const canvas = document.getElementById('hearts-canvas');
+            const ctx = canvas.getContext('2d');
+            let hearts = [];
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Heart {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = canvas.height + Math.random() * 20;
+                    this.size = Math.random() * 10 + 5;
+                    this.speed = Math.random() * 0.8 + 0.4;
+                    this.opacity = Math.random() * 0.4 + 0.2;
+                    this.swing = Math.random() * 0.02 - 0.01;
+                    this.angle = Math.random() * Math.PI * 2;
+                }
+                update() {
+                    this.y -= this.speed;
+                    this.angle += this.swing;
+                    this.x += Math.sin(this.angle) * 0.5;
+                    if (this.y < -20) this.reset();
+                }
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = this.opacity;
+                    ctx.fillStyle = '#f43f5e';
+                    ctx.beginPath();
+                    const topCurveHeight = this.size * 0.3;
+                    ctx.moveTo(this.x, this.y + topCurveHeight);
+                    ctx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + topCurveHeight);
+                    ctx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x, this.y + this.size, this.x, this.y + this.size);
+                    ctx.bezierCurveTo(this.x, this.y + this.size, this.x + this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + topCurveHeight);
+                    ctx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + topCurveHeight);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            for (let i = 0; i < 20; i++) {
+                hearts.push(new Heart());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                hearts.forEach(h => {
+                    h.update();
+                    h.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
