@@ -1,0 +1,69 @@
+{
+  "config": {
+    "partner1": "Kevin",
+    "partner2": "Milena",
+    "startDate": "2026-09-15T15:00",
+    "musicUrl": "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-acoustic-guitar-112349.mp3"
+  },
+  "timeline": [
+    {
+      "id": "1",
+      "title": "Nuestra Primera Cita",
+      "date": "2023-02-14",
+      "location": "Café del Centro",
+      "desc": "Hablamos durante 4 horas continuas sin ver el reloj. Ahí supe que eras la persona indicada.",
+      "photo": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "2",
+      "title": "Nuestro Primer Viaje Juntos",
+      "date": "2023-07-20",
+      "location": "Bariloche",
+      "desc": "Recorriendo los lagos, compartiendo chocolates calientes y atardeceres mágicos.",
+      "photo": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "places": [
+    {
+      "id": "1",
+      "name": "Mirador de la Montaña",
+      "category": "Viaje",
+      "mapUrl": "https://maps.google.com",
+      "desc": "Donde vimos el atardecer juntos y prometimos viajar siempre uno al lado del otro.",
+      "photo": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "letters": [
+    {
+      "id": "1",
+      "title": "Primer Año de Amor (1er Aniversario)",
+      "unlockDate": "2027-09-15",
+      "password": "",
+      "content": "¡Feliz primer año mi amor! 365 días llenos de risas, aprendizaje y complicidad única. Gracias por cada abrazo y por ser mi lugar favorito en el mundo."
+    },
+    {
+      "id": "2",
+      "title": "Aniversario #2",
+      "unlockDate": "2028-09-15",
+      "password": "",
+      "content": "Dos años construyendo un camino hermoso juntos. Cada día te quiero más que el anterior."
+    },
+    {
+      "id": "3",
+      "title": "Cápsula Secreta",
+      "unlockDate": "",
+      "password": "amor",
+      "content": "¡Descubriste la clave secreta! Esta carta es para recordarte que siempre estaré a tu lado celebrando cada logro y momento juntos."
+    }
+  ],
+  "gallery": [
+    {
+      "url": "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80",
+      "caption": "Atardecer juntos"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80",
+      "caption": "Nuestros abracitos"
+    }
+  ]
+}
